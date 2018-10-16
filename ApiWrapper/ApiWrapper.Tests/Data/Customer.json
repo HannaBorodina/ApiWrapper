@@ -1,0 +1,37 @@
+{
+  "value": {
+    "id": 7872458,
+    "version": 1,
+    "url": "tripletex.no/v2/customer/7872458",
+    "name": "Tripletex debitor",
+    "organizationNumber": "",
+    "supplierNumber": 0,
+    "customerNumber": 10002,
+    "isSupplier": false,
+    "isCustomer": true,
+    "isInactive": false,
+    "accountManager": {
+      "id": 1275766,
+      "url": "tripletex.no/v2/employee/1275766"
+    },
+    "email": "test.debitor@test.com",
+    "invoiceEmail": "rune.horneland@kravia.net",
+    "bankAccounts": [],
+    "phoneNumber": "32132132",
+    "phoneNumberMobile": "32165432",
+    "description": "",
+    "isPrivateIndividual": true,
+    "postalAddress": {
+      "id": 16998640,
+      "url": "tripletex.no/v2/address/16998640"
+    },
+    "physicalAddress": {
+      "id": 16998641,
+      "url": "tripletex.no/v2/address/16998641"
+    },
+    "deliveryAddress": null,
+    "category1": null,
+    "category2": null,
+    "category3": null
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "fullResultSize": 87,
+  "from": 0,
+  "count": 1,
+  "versionDigest": "f1YacyLnnVpg81lntrB14A==",
+  "values": [
+    {
+      "id": 62337619,
+      "version": 6,
+      "url": "tripletex.no/v2/invoice/62337619",
+      "invoiceNumber": 6,
+      "invoiceDate": "2018-01-01",
+      "customer": {
+        "id": 7872458,
+        "url": "tripletex.no/v2/customer/7872458"
+      },
+      "invoiceDueDate": "2018-01-15",
+      "kid": "",
+      "comment": "",
+      "orders": [
+        {
+          "id": 27215130,
+          "url": "tripletex.no/v2/order/27215130"
+        }
+      ],
+      "voucher": {
+        "id": 45198404,
+        "url": "tripletex.no/v2/ledger/voucher/45198404"
+      },
+      "deliveryDate": "2018-01-01",
+      "amount": 98750,
+      "amountCurrency": 98750,
+      "amountExcludingVat": 79000,
+      "amountExcludingVatCurrency": 79000,
+      "amountRoundoff": 0,
+      "amountRoundoffCurrency": 0,
+      "amountOutstanding": 0,
+      "amountOutstandingTotal": 0,
+      "sumRemits": 0,
+      "currency": {
+        "id": 1,
+        "url": "tripletex.no/v2/currency/1"
+      },
+      "isCreditNote": false,
+      "postings": [
+        {
+          "id": 205468664,
+          "url": "tripletex.no/v2/ledger/posting/205468664"
+        },
+        {
+          "id": 221968144,
+          "url": "tripletex.no/v2/ledger/posting/221968144"
+        }
+      ],
+      "reminders": []
+    }
+  ]
+}
