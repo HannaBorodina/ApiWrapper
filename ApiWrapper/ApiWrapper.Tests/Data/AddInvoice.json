@@ -1,0 +1,14 @@
+{
+  "invoiceDate": "2018-10-18",
+  "invoiceDueDate": "2018-10-21",
+  "orders": [
+    {
+      "id": 80,
+      "customer": {
+        "name": "Test new"
+      },
+      "orderDate": "2017-12-04",
+      "deliveryDate": "2018-02-05"
+    }
+  ]
+}

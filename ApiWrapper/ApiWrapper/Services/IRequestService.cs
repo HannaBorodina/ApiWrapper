@@ -5,6 +5,6 @@ namespace ApiWrapper.Services
     public interface IRequestService
     {
         Task<string> GetDataFromAPI(string url);
-        //Task<TResult> PostData();
+        Task<string> PostDataToApi(string data);
     }
 }

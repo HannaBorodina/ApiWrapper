@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiWrapper.Models;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace ApiWrapper.Services
 {
     public class ResponseGenerator : IResponseGenerator
     {
-        private InvoiceContext _context;
         public const string Succes = "true";
         public const string Failed = "false";
 
-        public ResponseGenerator(InvoiceContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<WrapperResponse> GenerateResponse(string value, string excMessage = null)
+        public async Task<WrapperResponse> GenerateResponse(string value = null, string excMessage = null)
         {
             var response = new WrapperResponse();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ApiWrapper.Helpers;
 using ApiWrapper.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,16 +32,28 @@ namespace ApiWrapper.Controllers
             }
             catch (Exception ex)
             {
-                var result = await _responseGenerator.GenerateResponse(excMessage: ex.Message);
+                var message = ex.GetaAllMessages();
+                var result = await _responseGenerator.GenerateResponse(excMessage: message);
                 return StatusCode(500, result);
             }
 
         }
 
-        // POST api/values
+        // POST /invoice
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] string value)
         {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                var message = ex.GetaAllMessages();
+                var result = await _responseGenerator.GenerateResponse(excMessage: message);
+                return StatusCode(500, result);
+
+            }
         }
     }
 }

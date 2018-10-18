@@ -28,7 +28,7 @@ namespace ApiWrapper.Services
         {
             var result = await Task.Run(() =>
             {
-                //TODO: make better validation checks
+                //TODO: make better validation checks based on types
                 if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
                     throw new Exception("One of the required parameters is missed : invoiceDateFrom, invoiceDateTo"); 
 
@@ -47,6 +47,11 @@ namespace ApiWrapper.Services
             var result = await _responseGenerator.GenerateResponse(value: dataFromAPI);
             return result;
 
+        }
+
+        public async Task HandlePostRequest(string data)
+        {
+           var response = await _requestService.PostDataToApi(data);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -38,6 +39,36 @@ namespace ApiWrapper.Tests
 
             Assert.NotNull(response);
 
+        }
+
+        [Theory(DisplayName = "Should set connection and post data to tripletex api without exceptions")]
+        [InlineData("AddInvoice.json", "https://tripletex.no/v2/invoice", "0:908140ea-bd1b-46a9-a9ed-65c5fac4dda3")]
+        public async Task PostDataToApi(string fileName, string url, string sessionToken)
+        {
+            string responseString;
+            var path = $"..\\netcoreapp2.1\\Data\\{fileName}";
+            string jsonData;
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                jsonData = sr.ReadToEnd();
+            }
+            var _token64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{sessionToken}"));
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + _token64);
+
+                //to avoid ssl errors
+                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+                var body = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, body);
+
+                responseString = await response.Content.ReadAsStringAsync();
+            }
+
+            //Assert.NotNull(responseString);
         }
     }
 }

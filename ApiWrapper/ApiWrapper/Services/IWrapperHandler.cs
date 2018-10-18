@@ -6,6 +6,7 @@ namespace ApiWrapper.Services
     public interface IWrapperHandler
     {
         Task<WrapperResponse> HandleGetRequest(string url);
+        Task HandlePostRequest(string data);
         Task<string> GetParams(string from, string to);
     }
 }

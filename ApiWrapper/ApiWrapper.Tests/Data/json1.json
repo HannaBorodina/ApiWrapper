@@ -1,0 +1,15 @@
+{
+  "value": {
+    "invoiceDate": "2018-10-18T15:12:46.285Z",
+    "invoiceDueDate": "2018-10-20T15:12:46.285Z",
+    "orders": [
+      {
+        "customer": {
+          "name": "customer"
+        },
+        "orderDate": "2018-10-18T15:12:46.285Z",
+        "deliveryDate": "2018-10-19T15:12:46.285Z"
+      }
+    ]
+  }
+}

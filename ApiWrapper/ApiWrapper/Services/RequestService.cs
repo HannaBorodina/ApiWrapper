@@ -11,20 +11,22 @@ namespace ApiWrapper.Services
 {
     public class RequestService : IRequestService
     {
-        private string _token;
+        private string _token64;
+        private string _url;
 
         public RequestService(IConfiguration configuration)
         {
-            _token = configuration["TripletexApi:token"];
+            var tokenFromConfig = configuration["TripletexApi:token"];
+            _token64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{tokenFromConfig}"));
+            _url = configuration["TripletexApi:url"];
         }
         public async Task<string> GetDataFromAPI(string url)
-        {
-            var token64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_token}"));
+        {            
             string response;
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("Authorization", "Basic " + token64);
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + _token64);
 
                 //to avoid ssl errors
                 ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
@@ -33,6 +35,23 @@ namespace ApiWrapper.Services
             }
 
             return response;
+        }
+
+        public async Task<string> PostDataToApi(string data)
+        {
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + _token64);
+
+                //to avoid ssl errors
+                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+                var body = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(_url, body);
+            }
+
+            return "ok";
         }
     }
 }
