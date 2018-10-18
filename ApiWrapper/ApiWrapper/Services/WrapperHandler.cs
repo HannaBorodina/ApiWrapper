@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using ApiWrapper.Models;
@@ -24,13 +25,25 @@ namespace ApiWrapper.Services
             _url = configuration["TripletexApi:url"];
         }
 
+        public async Task<string> GetBody(Stream stream)
+        {
+            string json;
+
+            using (var readStream = new StreamReader(stream, Encoding.UTF8))
+            {
+                json = await readStream.ReadToEndAsync();
+            }
+
+            return json;
+        }
+
         public async Task<string> GetParams(string from, string to)
         {
             var result = await Task.Run(() =>
             {
                 //TODO: make better validation checks based on types
                 if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
-                    throw new Exception("One of the required parameters is missed : invoiceDateFrom, invoiceDateTo"); 
+                    throw new Exception("One of the required parameters is missed : invoiceDateFrom, invoiceDateTo");
 
                 var parameters = $"{_url}?invoiceDateFrom={from}&invoiceDateTo={to}";
                 return parameters;
@@ -49,9 +62,16 @@ namespace ApiWrapper.Services
 
         }
 
-        public async Task HandlePostRequest(string data)
+        public async Task<WrapperResponse> HandlePostRequest(string data)
         {
-           var response = await _requestService.PostDataToApi(data);
+            var response = await _requestService.PostDataToApi(data);
+            if (string.IsNullOrEmpty(response))
+                throw new Exception("Can't create invoice in tripletex api");
+
+            await _dbService.AddDataToDB<InvoiceValue>(data);
+
+            var result = await _responseGenerator.GenerateResponse(created: "Invoice created");
+            return result;
         }
     }
 }

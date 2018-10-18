@@ -12,7 +12,7 @@ namespace ApiWrapper.Services
         public const string Succes = "true";
         public const string Failed = "false";
 
-        public async Task<WrapperResponse> GenerateResponse(string value = null, string excMessage = null)
+        public async Task<WrapperResponse> GenerateResponse(string value = null, string excMessage = null, string created = null)
         {
             var response = new WrapperResponse();
 
@@ -29,6 +29,13 @@ namespace ApiWrapper.Services
                 {
                     response.Success = Succes;
                     response.Value = GetResponseType(value);
+
+                    return response;
+                }
+                else if (!string.IsNullOrEmpty(created))
+                {
+                    response.Success = Succes;
+                    response.Error = created;
 
                     return response;
                 }

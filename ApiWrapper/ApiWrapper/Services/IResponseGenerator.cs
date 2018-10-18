@@ -5,6 +5,6 @@ namespace ApiWrapper.Services
 {
     public interface IResponseGenerator
     {
-        Task<WrapperResponse> GenerateResponse(string value = null, string excMessage = null);
+        Task<WrapperResponse> GenerateResponse(string value = null, string excMessage = null, string created = null);
     }
 }

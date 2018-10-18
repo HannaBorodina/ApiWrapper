@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using ApiWrapper.Helpers;
 using ApiWrapper.Services;
@@ -41,11 +43,14 @@ namespace ApiWrapper.Controllers
 
         // POST /invoice
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string value)
+        public async Task<ActionResult> Post()
         {
             try
             {
-                throw new NotImplementedException();
+                var requestJson = await _handler.GetBody(Request.Body);
+                var result = await _handler.HandlePostRequest(requestJson);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

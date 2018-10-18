@@ -39,7 +39,7 @@ namespace ApiWrapper.Services
 
         public async Task<string> PostDataToApi(string data)
         {
-
+            HttpResponseMessage message;
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Authorization", "Basic " + _token64);
@@ -48,10 +48,11 @@ namespace ApiWrapper.Services
                 ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
                 var body = new StringContent(data, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(_url, body);
+                message = await client.PostAsync(_url, body);
             }
 
-            return "ok";
+            var result = message.StatusCode == HttpStatusCode.Created ? "ok" : null;
+            return result;
         }
     }
 }

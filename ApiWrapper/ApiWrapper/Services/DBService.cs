@@ -27,6 +27,15 @@ namespace ApiWrapper.Services
                 }
                 await _context.SaveChangesAsync();
             }
+            else if (typeof(T) == typeof(InvoiceValue))
+            {
+                var invResponse = JsonConvert.DeserializeObject<InvoiceValue>(data);
+
+                if (_context.Invoices.FirstOrDefault(i => i.Id == invResponse.Id) == null)
+                    _context.Invoices.Add(invResponse);
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
